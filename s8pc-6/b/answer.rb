@@ -7,13 +7,9 @@ readlines.each do |l|
   ends << targets[-1][1]
 end
 
-answer = Float::INFINITY
-starts.each do |s|
-  ends.each do |e|
-    sec = targets.map { |a, b| (s - a).abs + (a - b).abs + (b - e).abs }.inject(:+)
+# 開始マス、終了マスとして各買い物客の開始マス、終了マスの中央値を使用すると、
+# 移動距離の合計が最小(= 最適解)となる(AtCoderの解説参照)
+s = starts.sort[starts.size / 2]
+e = ends.sort[ends.size / 2]
 
-    answer = [answer, sec].min
-  end
-end
-
-puts answer
+puts targets.map { |a, b| (s - a).abs + (a - b).abs + (b - e).abs }.inject(:+)
