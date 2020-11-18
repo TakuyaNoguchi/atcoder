@@ -1,17 +1,10 @@
 N = gets.to_i
 x_y = readlines.map { |l| l.split.map(&:to_i) }
 
-distances = Array.new(N) { Array.new(N) }
+puts [*0...N].inject(0) { |sum1, i|
+  sum1 + [*(i + 1)...N].inject(0) { |sum2, j|
+    d = Math.sqrt((x_y[i][0] - x_y[j][0])**2 + (x_y[i][1] - x_y[j][1])**2)
 
-x_y.each_with_index do |(xi, yi), i|
-  x_y.each_with_index do |(xj, yj), j|
-    distances[i][j] = Math.sqrt((xi - xj)**2 + (yi - yj)**2)
-  end
-end
-
-routes = [*0...N].permutation(N)
-puts (routes.inject(0) { |sum, route|
-  sum + route.each_cons(2).inject(0) { |cost, (from, to)|
-    cost + distances[from][to]
+    sum2 + d * (2.to_r / N)
   }
-} / routes.size).round(10)
+}.round(10)
