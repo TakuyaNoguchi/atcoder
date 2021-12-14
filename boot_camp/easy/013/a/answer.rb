@@ -7,7 +7,7 @@ while [a, b, c].all?(&:even?)
       break
     end
 
-    a, b, c = b / 2 + c / 2, a / 2 + c / 2, a / 2 + b / 2
+    a, b, c = (b / 2 + c / 2), (a / 2 + c / 2), (a / 2 + b / 2)
     ans += 1
 end
 
