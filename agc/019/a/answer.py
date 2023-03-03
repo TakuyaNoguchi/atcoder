@@ -1,12 +1,14 @@
 Q, H, S, D = map(int, input().split())
 N = int(input())
-one_min = min([Q * 4, H * 2, S])
+min_one = min([Q * 4, H * 2, S])
+ans = 0
 
-if N == 1:
-    print(one_min)
+if min_one * 2 >= D:
+    ans += D * (N // 2)
+
+    if N % 2 == 1:
+        ans += min_one
 else:
-    two_min = min(one_min * 2, D)
-    ans = two_min * (N // 2)
-    if N % 2 == 1: ans += one_min
+    ans = min_one * N
 
-    print(ans)
+print(ans)
